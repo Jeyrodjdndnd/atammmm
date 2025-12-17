@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>HACKED BY ARES</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+  <style>
+    :root{
+      --red: #ff3b3b;
+      --white: #ffffff;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    
+    html, body {
+      height: 100%; 
+      width: 100%; 
+      background: #000;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      font-family: "Poppins", sans-serif;
+    }
+
+    /* Video Yerleşimi - Mobilde Tam Görünüm */
+    #bgVideo {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      object-fit: contain; /* Mobilde zoom yapmaz, videoyu sığdırır */
+      background-color: black;
+    }
+
+    /* Karartma Katmanı */
+    .overlay-dark {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.4);
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    /* İçerik Paneli - 31. Saniyede Görünecek */
+    .main-content {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      opacity: 0; 
+      visibility: hidden;
+      transition: opacity 2s ease; /* Daha yumuşak bir giriş */
+      z-index: 10;
+      padding: 20px;
+    }
+
+    .visible {
+      opacity: 1 !important;
+      visibility: visible !important;
+    }
+
+    h1 {
+      font-size: clamp(30px, 8vw, 70px);
+      font-weight: 900;
+      color: var(--red);
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      text-shadow: 0 0 20px rgba(255, 0, 0, 0.7);
+      margin-bottom: 25px;
+      font-style: italic;
+    }
+
+    .handles {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .handle {
+      font-weight: 700;
+      color: var(--white);
+      font-size: clamp(18px, 4vw, 24px);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      transition: 0.3s;
+    }
+
+    .handle i {
+      color: #E1306C;
+      font-size: 1.3em;
+    }
+
+    .handle:hover {
+      transform: scale(1.1);
+    }
+
+    .warning-text {
+      position: absolute;
+      bottom: 40px;
+      font-weight: 700;
+      color: #ffd700;
+      font-size: clamp(12px, 3.5vw, 18px);
+      letter-spacing: 0.5px;
+      width: 90%;
+      text-align: center;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+    }
+
+    /* Ses Butonu */
+    .sound-btn {
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+      z-index: 100;
+      background: rgba(0, 0, 0, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      color: white;
+      padding: 12px 20px;
+      border-radius: 30px;
+      cursor: pointer;
+      backdrop-filter: blur(8px);
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      font-family: inherit;
+    }
+  </style>
+</head>
+<body>
+
+  <video id="bgVideo" autoplay muted loop playsinline preload="auto">
+    <source src="https://ik.imagekit.io/arescxn/Atat%C3%BCrk%20-%20Mark%20Edit..mp4" type="video/mp4">
+  </video>
+
+  <div class="overlay-dark"></div>
+
+  <main id="mainPanel" class="main-content">
+    <h1>HACKED BY ARES</h1>
+
+    <nav class="handles">
+      <a class="handle" href="https://instagram.com/arescxn" target="_blank">
+        <i class="fab fa-instagram"></i> arescxn
+      </a>
+      <a class="handle" href="https://instagram.com/ehoq7" target="_blank">
+        <i class="fab fa-instagram"></i> ehoq7
+      </a>
+    </nav>
+
+    <div class="warning-text">sistem açıklarını kapatın bu size ilk uyarimizdir değerini bilin</div>
+  </main>
+
+  <button id="soundBtn" class="sound-btn">
+    <i id="volIcon" class="fas fa-volume-mute"></i>
+    <span id="soundLabel">Sesi Aç</span>
+  </button>
+
+  <script>
+    const video = document.getElementById('bgVideo');
+    const mainPanel = document.getElementById('mainPanel');
+    const soundBtn = document.getElementById('soundBtn');
+    const volIcon = document.getElementById('volIcon');
+    const soundLabel = document.getElementById('soundLabel');
+
+    // 31. Saniyede Yazıları Tetikle
+    video.addEventListener('timeupdate', function() {
+      if (video.currentTime >= 31) {
+        mainPanel.classList.add('visible');
+      } else {
+        // Video başa sararsa yazıları tekrar gizler (loop için)
+        mainPanel.classList.remove('visible');
+      }
+    });
+
+    // Ses Kontrolü
+    soundBtn.addEventListener('click', function() {
+      if (video.muted) {
+        video.muted = false;
+        volIcon.classList.replace('fa-volume-mute', 'fa-volume-up');
+        soundLabel.textContent = 'Sesi Kapat';
+      } else {
+        video.muted = true;
+        volIcon.classList.replace('fa-volume-up', 'fa-volume-mute');
+        soundLabel.textContent = 'Sesi Aç';
+      }
+    });
+
+    // Sayfa yüklendiğinde videoyu zorla oynat
+    window.addEventListener('load', () => {
+      video.play().catch(e => console.log("Otomatik oynatma için kullanıcı etkileşimi gerekiyor."));
+    });
+  </script>
+
+</body>
+</html>
